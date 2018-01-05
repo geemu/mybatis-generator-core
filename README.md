@@ -8,7 +8,7 @@ mybatis generator改写 UTF-8编码 字段和方法中文注释
 # 使用方法
 - 1.将jar包放置到本地maven仓库org\mybatis\generator\mybatis-generator-core\1.3.6-zh-CN下
 - 2.pom中  
-            ``<plugin>
+            `<plugin>
                 <groupId>org.mybatis.generator</groupId>
                 <artifactId>mybatis-generator-maven-plugin</artifactId>
                 <version>1.3.6</version>
