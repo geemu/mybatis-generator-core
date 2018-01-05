@@ -27,7 +27,9 @@ import org.mybatis.generator.api.dom.java.FullyQualifiedJavaType;
  */
 public class OutputUtilities {
 
-    /** The Constant lineSeparator. */
+    /**
+     * The Constant lineSeparator.
+     */
     private static final String lineSeparator;
 
     static {
@@ -49,10 +51,8 @@ public class OutputUtilities {
      * Utility method that indents the buffer by the default amount for Java
      * (four spaces per indent level).
      *
-     * @param sb
-     *            a StringBuilder to append to
-     * @param indentLevel
-     *            the required indent level
+     * @param sb          a StringBuilder to append to
+     * @param indentLevel the required indent level
      */
     public static void javaIndent(StringBuilder sb, int indentLevel) {
         for (int i = 0; i < indentLevel; i++) {
@@ -61,13 +61,8 @@ public class OutputUtilities {
     }
 
     /**
-     * Utility method that indents the buffer by the default amount for XML (two
-     * spaces per indent level).
-     *
-     * @param sb
-     *            a StringBuilder to append to
-     * @param indentLevel
-     *            the required indent level
+     * @param sb          a StringBuilder to append to
+     * @param indentLevel the required indent level
      */
     public static void xmlIndent(StringBuilder sb, int indentLevel) {
         for (int i = 0; i < indentLevel; i++) {
@@ -78,8 +73,7 @@ public class OutputUtilities {
     /**
      * Utility method. Adds a newline character to a StringBuilder.
      *
-     * @param sb
-     *            the StringBuilder to be appended to
+     * @param sb the StringBuilder to be appended to
      */
     public static void newLine(StringBuilder sb) {
         sb.append(lineSeparator);
@@ -88,8 +82,7 @@ public class OutputUtilities {
     /**
      * returns a unique set of "import xxx;" Strings for the set of types.
      *
-     * @param importedTypes
-     *            the imported types
+     * @param importedTypes the imported types
      * @return the sets the
      */
     public static Set<String> calculateImports(
