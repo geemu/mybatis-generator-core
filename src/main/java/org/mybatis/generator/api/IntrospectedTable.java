@@ -1,17 +1,17 @@
 /**
- *    Copyright 2006-2018 the original author or authors.
- *
- *    Licensed under the Apache License, Version 2.0 (the "License");
- *    you may not use this file except in compliance with the License.
- *    You may obtain a copy of the License at
- *
- *       http://www.apache.org/licenses/LICENSE-2.0
- *
- *    Unless required by applicable law or agreed to in writing, software
- *    distributed under the License is distributed on an "AS IS" BASIS,
- *    WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
- *    See the License for the specific language governing permissions and
- *    limitations under the License.
+ * Copyright 2006-2018 the original author or authors.
+ * <p>
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ * <p>
+ * http://www.apache.org/licenses/LICENSE-2.0
+ * <p>
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
  */
 package org.mybatis.generator.api;
 
@@ -43,14 +43,13 @@ import org.mybatis.generator.internal.rules.Rules;
  * Base class for all code generator implementations. This class provides many
  * of the housekeeping methods needed to implement a code generator, with only
  * the actual code generation methods left unimplemented.
- * 
+ *
  * @author Jeff Butler
- * 
  */
 public abstract class IntrospectedTable {
 
     public enum TargetRuntime {
-        IBATIS2, 
+        IBATIS2,
         MYBATIS3
     }
 
@@ -66,9 +65,13 @@ public abstract class IntrospectedTable {
         ATTR_IBATIS2_SQL_MAP_NAMESPACE,
         ATTR_MYBATIS3_XML_MAPPER_PACKAGE,
         ATTR_MYBATIS3_XML_MAPPER_FILE_NAME,
-        /** also used as XML Mapper namespace if a Java mapper is generated. */
+        /**
+         * also used as XML Mapper namespace if a Java mapper is generated.
+         */
         ATTR_MYBATIS3_JAVA_MAPPER_TYPE,
-        /** used as XML Mapper namespace if no client is generated. */
+        /**
+         * used as XML Mapper namespace if no client is generated.
+         */
         ATTR_MYBATIS3_FALLBACK_SQL_MAP_NAMESPACE,
         ATTR_FULLY_QUALIFIED_TABLE_NAME_AT_RUNTIME,
         ATTR_ALIASED_FULLY_QUALIFIED_TABLE_NAME_AT_RUNTIME,
@@ -118,7 +121,9 @@ public abstract class IntrospectedTable {
      */
     protected Map<String, Object> attributes;
 
-    /** Internal attributes are used to store commonly accessed items by all code generators. */
+    /**
+     * Internal attributes are used to store commonly accessed items by all code generators.
+     */
     protected Map<IntrospectedTable.InternalAttribute, String> internalAttributes;
 
     /**
@@ -213,7 +218,7 @@ public abstract class IntrospectedTable {
     /**
      * Returns true if any of the columns in the table are JDBC Dates (as
      * opposed to timestamps).
-     * 
+     *
      * @return true if the table contains DATE columns
      */
     public boolean hasJDBCDateColumns() {
@@ -241,7 +246,7 @@ public abstract class IntrospectedTable {
     /**
      * Returns true if any of the columns in the table are JDBC Times (as
      * opposed to timestamps).
-     * 
+     *
      * @return true if the table contains TIME columns
      */
     public boolean hasJDBCTimeColumns() {
@@ -270,7 +275,7 @@ public abstract class IntrospectedTable {
      * Returns the columns in the primary key. If the generatePrimaryKeyClass()
      * method returns false, then these columns will be iterated as the
      * parameters of the selectByPrimaryKay and deleteByPrimaryKey methods
-     * 
+     *
      * @return a List of ColumnDefinition objects for columns in the primary key
      */
     public List<IntrospectedColumn> getPrimaryKeyColumns() {
@@ -353,7 +358,7 @@ public abstract class IntrospectedTable {
      * Gets the base record type.
      *
      * @return the type for the record (the class that holds non-primary key and non-BLOB fields). Note that the value
-     *         will be calculated regardless of whether the table has these columns or not.
+     * will be calculated regardless of whether the table has these columns or not.
      */
     public String getBaseRecordType() {
         return internalAttributes.get(InternalAttribute.ATTR_BASE_RECORD_TYPE);
@@ -372,7 +377,7 @@ public abstract class IntrospectedTable {
      * Gets the record with blo bs type.
      *
      * @return the type for the record with BLOBs class. Note that the value will be calculated regardless of whether
-     *         the table has BLOB columns or not.
+     * the table has BLOB columns or not.
      */
     public String getRecordWithBLOBsType() {
         return internalAttributes
@@ -383,7 +388,7 @@ public abstract class IntrospectedTable {
      * Calculates an SQL Map file name for the table. Typically the name is
      * "XXXX_SqlMap.xml" where XXXX is the fully qualified table name (delimited
      * with underscores).
-     * 
+     *
      * @return the name of the SqlMap file
      */
     public String getIbatis2SqlMapFileName() {
@@ -412,7 +417,7 @@ public abstract class IntrospectedTable {
 
     /**
      * Calculates the package for the current table.
-     * 
+     *
      * @return the package for the SqlMap for the current table
      */
     public String getIbatis2SqlMapPackage() {
@@ -526,27 +531,27 @@ public abstract class IntrospectedTable {
         setSqlMapFullyQualifiedRuntimeTableName(calculateSqlMapFullyQualifiedRuntimeTableName());
         setSqlMapAliasedFullyQualifiedRuntimeTableName(calculateSqlMapAliasedFullyQualifiedRuntimeTableName());
 
-        setCountByExampleStatementId("countByExample"); //$NON-NLS-1$
-        setDeleteByExampleStatementId("deleteByExample"); //$NON-NLS-1$
-        setDeleteByPrimaryKeyStatementId("deleteByPrimaryKey"); //$NON-NLS-1$
-        setInsertStatementId("insert"); //$NON-NLS-1$
-        setInsertSelectiveStatementId("insertSelective"); //$NON-NLS-1$
-        setSelectAllStatementId("selectAll"); //$NON-NLS-1$
-        setSelectByExampleStatementId("selectByExample"); //$NON-NLS-1$
-        setSelectByExampleWithBLOBsStatementId("selectByExampleWithBLOBs"); //$NON-NLS-1$
-        setSelectByPrimaryKeyStatementId("selectByPrimaryKey"); //$NON-NLS-1$
-        setUpdateByExampleStatementId("updateByExample"); //$NON-NLS-1$
-        setUpdateByExampleSelectiveStatementId("updateByExampleSelective"); //$NON-NLS-1$
-        setUpdateByExampleWithBLOBsStatementId("updateByExampleWithBLOBs"); //$NON-NLS-1$
-        setUpdateByPrimaryKeyStatementId("updateByPrimaryKey"); //$NON-NLS-1$
-        setUpdateByPrimaryKeySelectiveStatementId("updateByPrimaryKeySelective"); //$NON-NLS-1$
-        setUpdateByPrimaryKeyWithBLOBsStatementId("updateByPrimaryKeyWithBLOBs"); //$NON-NLS-1$
-        setBaseResultMapId("BaseResultMap"); //$NON-NLS-1$
-        setResultMapWithBLOBsId("ResultMapWithBLOBs"); //$NON-NLS-1$
-        setExampleWhereClauseId("Example_Where_Clause"); //$NON-NLS-1$
-        setBaseColumnListId("Base_Column_List"); //$NON-NLS-1$
-        setBlobColumnListId("Blob_Column_List"); //$NON-NLS-1$
-        setMyBatis3UpdateByExampleWhereClauseId("Update_By_Example_Where_Clause"); //$NON-NLS-1$
+        setCountByExampleStatementId("countByExample");
+        setDeleteByExampleStatementId("deleteByExample");
+        setDeleteByPrimaryKeyStatementId("deleteByPrimaryKey");
+        setInsertStatementId("insert");
+        setInsertSelectiveStatementId("insertSelective");
+        setSelectAllStatementId("selectAll");
+        setSelectByExampleStatementId("selectByExample");
+        setSelectByExampleWithBLOBsStatementId("selectByExampleWithBLOBs");
+        setSelectByPrimaryKeyStatementId("selectByPrimaryKey");
+        setUpdateByExampleStatementId("updateByExample");
+        setUpdateByExampleSelectiveStatementId("updateByExampleSelective");
+        setUpdateByExampleWithBLOBsStatementId("updateByExampleWithBLOBs");
+        setUpdateByPrimaryKeyStatementId("updateByPrimaryKey");
+        setUpdateByPrimaryKeySelectiveStatementId("updateByPrimaryKeySelective");
+        setUpdateByPrimaryKeyWithBLOBsStatementId("updateByPrimaryKeyWithBLOBs");
+        setBaseResultMapId("BaseResultMap");
+        setResultMapWithBLOBsId("ResultMapWithBLOBs");
+        setExampleWhereClauseId("Example_Where_Clause");
+        setBaseColumnListId("Base_Column_List");
+        setBlobColumnListId("Blob_Column_List");
+        setMyBatis3UpdateByExampleWhereClauseId("Update_By_Example_Where_Clause");
     }
 
     public void setBlobColumnListId(String s) {
@@ -811,14 +816,14 @@ public abstract class IntrospectedTable {
         sb.append(calculateJavaClientImplementationPackage());
         sb.append('.');
         sb.append(fullyQualifiedTable.getDomainObjectName());
-        sb.append("DAOImpl"); //$NON-NLS-1$
+        sb.append("DAOImpl");
         setDAOImplementationType(sb.toString());
 
         sb.setLength(0);
         sb.append(calculateJavaClientInterfacePackage());
         sb.append('.');
         sb.append(fullyQualifiedTable.getDomainObjectName());
-        sb.append("DAO"); //$NON-NLS-1$
+        sb.append("DAO");
         setDAOInterfaceType(sb.toString());
 
         sb.setLength(0);
@@ -832,7 +837,7 @@ public abstract class IntrospectedTable {
                 sb.append('.');
             }
             sb.append(fullyQualifiedTable.getDomainObjectName());
-            sb.append("Mapper"); //$NON-NLS-1$
+            sb.append("Mapper");
         }
         setMyBatis3JavaMapperType(sb.toString());
 
@@ -847,7 +852,7 @@ public abstract class IntrospectedTable {
                 sb.append('.');
             }
             sb.append(fullyQualifiedTable.getDomainObjectName());
-            sb.append("SqlProvider"); //$NON-NLS-1$
+            sb.append("SqlProvider");
         }
         setMyBatis3SqlProviderType(sb.toString());
     }
@@ -870,7 +875,7 @@ public abstract class IntrospectedTable {
         sb.append(pakkage);
         sb.append('.');
         sb.append(fullyQualifiedTable.getDomainObjectName());
-        sb.append("Key"); //$NON-NLS-1$
+        sb.append("Key");
         setPrimaryKeyType(sb.toString());
 
         sb.setLength(0);
@@ -883,14 +888,14 @@ public abstract class IntrospectedTable {
         sb.append(pakkage);
         sb.append('.');
         sb.append(fullyQualifiedTable.getDomainObjectName());
-        sb.append("WithBLOBs"); //$NON-NLS-1$
+        sb.append("WithBLOBs");
         setRecordWithBLOBsType(sb.toString());
 
         sb.setLength(0);
         sb.append(pakkage);
         sb.append('.');
         sb.append(fullyQualifiedTable.getDomainObjectName());
-        sb.append("Example"); //$NON-NLS-1$
+        sb.append("Example");
         setExampleType(sb.toString());
     }
 
@@ -898,7 +903,7 @@ public abstract class IntrospectedTable {
         StringBuilder sb = new StringBuilder();
         SqlMapGeneratorConfiguration config = context
                 .getSqlMapGeneratorConfiguration();
-        
+
         // config can be null if the Java client does not require XML
         if (config != null) {
             sb.append(config.getTargetPackage());
@@ -920,7 +925,7 @@ public abstract class IntrospectedTable {
     protected String calculateIbatis2SqlMapFileName() {
         StringBuilder sb = new StringBuilder();
         sb.append(fullyQualifiedTable.getIbatis2SqlMapNamespace());
-        sb.append("_SqlMap.xml"); //$NON-NLS-1$
+        sb.append("_SqlMap.xml");
         return sb.toString();
     }
 
@@ -934,10 +939,10 @@ public abstract class IntrospectedTable {
             } else {
                 sb.append(mapperName.substring(ind + 1));
             }
-            sb.append(".xml"); //$NON-NLS-1$
+            sb.append(".xml");
         } else {
             sb.append(fullyQualifiedTable.getDomainObjectName());
-            sb.append("Mapper.xml"); //$NON-NLS-1$
+            sb.append("Mapper.xml");
         }
         return sb.toString();
     }
@@ -954,7 +959,7 @@ public abstract class IntrospectedTable {
             sb.append(tableConfiguration.getMapperName());
         } else {
             sb.append(fullyQualifiedTable.getDomainObjectName());
-            sb.append("Mapper"); //$NON-NLS-1$
+            sb.append("Mapper");
         }
         return sb.toString();
     }
@@ -979,23 +984,21 @@ public abstract class IntrospectedTable {
 
     /**
      * This method can be used to initialize the generators before they will be called.
-     * 
+     * <p>
      * <p>This method is called after all the setX methods, but before getNumberOfSubtasks(), getGeneratedJavaFiles, and
      * getGeneratedXmlFiles.
      *
-     * @param warnings
-     *            the warnings
-     * @param progressCallback
-     *            the progress callback
+     * @param warnings         the warnings
+     * @param progressCallback the progress callback
      */
     public abstract void calculateGenerators(List<String> warnings,
-            ProgressCallback progressCallback);
+                                             ProgressCallback progressCallback);
 
     /**
      * This method should return a list of generated Java files related to this
      * table. This list could include various types of model classes, as well as
      * DAO classes.
-     * 
+     *
      * @return the list of generated Java files for this table
      */
     public abstract List<GeneratedJavaFile> getGeneratedJavaFiles();
@@ -1004,7 +1007,7 @@ public abstract class IntrospectedTable {
      * This method should return a list of generated XML files related to this
      * table. Most implementations will only return one file - the generated
      * SqlMap file.
-     * 
+     *
      * @return the list of generated XML files for this table
      */
     public abstract List<GeneratedXmlFile> getGeneratedXmlFiles();
@@ -1012,7 +1015,7 @@ public abstract class IntrospectedTable {
     /**
      * Denotes whether generated code is targeted for Java version 5.0 or
      * higher.
-     * 
+     *
      * @return true if the generated code makes use of Java5 features
      */
     public abstract boolean isJava5Targeted();
@@ -1020,7 +1023,7 @@ public abstract class IntrospectedTable {
     /**
      * This method should return the number of progress messages that will be
      * send during the generation phase.
-     * 
+     *
      * @return the number of progress messages
      */
     public abstract int getGenerationSteps();
@@ -1028,8 +1031,7 @@ public abstract class IntrospectedTable {
     /**
      * This method exists to give plugins the opportunity to replace the calculated rules if necessary.
      *
-     * @param rules
-     *            the new rules
+     * @param rules the new rules
      */
     public void setRules(Rules rules) {
         this.rules = rules;
@@ -1150,11 +1152,11 @@ public abstract class IntrospectedTable {
                 InternalAttribute.ATTR_MYBATIS3_SQL_PROVIDER_TYPE,
                 mybatis3SqlProviderType);
     }
-    
+
     public TargetRuntime getTargetRuntime() {
         return targetRuntime;
     }
-    
+
     public boolean isImmutable() {
         Properties properties;
 
