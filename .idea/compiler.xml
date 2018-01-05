@@ -12,7 +12,7 @@
       </profile>
     </annotationProcessing>
     <bytecodeTargetLevel>
-      <module name="mybatis-generator-core" target="1.6" />
+      <module name="mybatis-generator-core" target="1.8" />
       <module name="mybatis-generator-core-zh-CN" target="1.6" />
     </bytecodeTargetLevel>
   </component>
